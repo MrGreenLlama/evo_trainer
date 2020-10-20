@@ -23,34 +23,34 @@ jobs:
     
     - name: 'Checkout Repo'
       uses: actions/checkout@v2
-      with:
-        path: 'custom'
     
     - name: 'Checkout RPi-Gen'
       uses: actions/checkout@v2
       with:
         repository: 'RPi-Distro/pi-gen'
-        path: 'pi-gen'
+        path: 'pi-gen-files/pi-gen'
   
     - name: 'Setup QEMU Static'
       uses: docker/setup-qemu-action@v1
       id: qemu
 
     - name: 'Prepare stages'
-      working-directory: './pi-gen'
+      working-directory: 'pi-gen-files/pi-gen'
       run: |
         touch ./stage2/SKIP_IMAGES
+        ln -sf ../config ./config
+        ln -sf ../custom_stage ./custom_stage
 
     - name: 'Do Build'
-      working-directory: './pi-gen'
+      working-directory: 'pi-gen-files/pi-gen'
       run: |
-        ./build-docker.sh -c ../custom/image-files/config
+        sudo ./build-docker.sh
 
     - name: 'Store resulting Image'
       uses: actions/upload-artifact@v2
       with:
         name: 'Images'
         path: |
-          ./pi-gen/deploy/*.img
-          ./pi-gen/deploy/*.zip
+          pi-gen-files/pi-gen/deploy/*.img
+          pi-gen-files/pi-gen/deploy/*.zip
 
