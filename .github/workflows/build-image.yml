@@ -38,13 +38,13 @@ jobs:
       working-directory: 'pi-gen-files/pi-gen'
       run: |
         touch ./stage2/SKIP_IMAGES
-        ln -sf ../config ./config
-        ln -sf ../custom_stage ./custom_stage
+        cp -a ../config ./config
+        cp -a ../custom_stage ./custom_stage
 
     - name: 'Do Build'
       working-directory: 'pi-gen-files/pi-gen'
       run: |
-        sudo ./build-docker.sh
+        sudo ./build-docker.sh -c config
 
     - name: 'Store resulting Image'
       uses: actions/upload-artifact@v2
