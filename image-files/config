@@ -1,4 +1,4 @@
-IMG_NAME='EvoTrainer_Raspian'
+IMG_NAME='EvoTrainer_Raspbian'
 LOCALE_DEFAULT=de_DE.UTF-8
 KEYBOARD_KEYMAP=de
 KEYBOARD_LAYOUT=German
