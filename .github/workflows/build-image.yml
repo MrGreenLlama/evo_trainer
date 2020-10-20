@@ -1,0 +1,51 @@
+name: 'Build Image'
+
+on:
+- push:
+  branches:
+  - 'master'
+  paths:
+  - '.github/workflows/build-image.yml'
+  - 'image-files/**'
+- pull_request:
+  branches:
+  - 'master'
+  paths:
+  - '.github/workflows/build-image.yml'
+  - 'image-files/**'
+
+jobs:
+  build_image:
+    name: 'Build Raspberry OS Image'
+    runs-on: 'ubuntu-latest'
+    
+    steps:
+    
+    - name: 'Checkout Repo'
+      uses: actions/checkout@v2
+      with:
+        path: 'custom'
+    
+    - name: 'Checkout RPi-Gen'
+      uses: actions/checkout@v2
+      with:
+        repository: 'RPi-Distro/pi-gen'
+        path: 'pi-gen'
+  
+    - name: 'Setup QEMU Static'
+      uses: docker/setup-qemu-action@v1
+      id: qemu
+
+    - name: 'Do Build'
+      working-directory: './pi-gen'
+      run: |
+        ./build-docker.sh -c ../custom/image-files/config
+
+    - name: 'Store resulting Image'
+      uses: actions/upload-artifact@v2
+      with:
+        name: 'Images'
+        path: |
+          ./pi-gen/deploy/*.img
+          ./pi-gen/deploy/*.zip
+
