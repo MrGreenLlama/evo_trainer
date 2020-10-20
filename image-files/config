@@ -1,0 +1,10 @@
+IMG_NAME='EvoTrainer_Raspian'
+LOCALE_DEFAULT=de_DE.UTF-8
+KEYBOARD_KEYMAP=de
+KEYBOARD_LAYOUT=German
+TIMEZONE_DEFAULT='Europe/Berlin'
+FIRST_USER_NAME=evocortex
+FIRST_USER_PASS=evocortex
+ENABLE_SSH=1
+STAGE_LIST="stage0 stage1 stage2 ../custom/image-files/custom_stage"
+

@@ -36,6 +36,11 @@ jobs:
       uses: docker/setup-qemu-action@v1
       id: qemu
 
+    - name: 'Prepare stages'
+      working-directory: './pi-gen'
+      run: |
+        touch ./stage2/SKIP_IMAGES
+
     - name: 'Do Build'
       working-directory: './pi-gen'
       run: |
