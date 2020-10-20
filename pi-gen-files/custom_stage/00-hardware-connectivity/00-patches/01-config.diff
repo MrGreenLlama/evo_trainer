@@ -1,0 +1,20 @@
+--- config.txt.orig	2020-10-20 15:31:28.000000000 +0200
++++ config.txt	2020-10-20 17:09:10.607332391 +0200
+@@ -53,6 +53,17 @@
+ 
+ # Additional overlays and parameters are documented /boot/overlays/README
+ 
++# enable USB-OtG Network
++dtoverlay=dwc2
++
++# enable can
++dtoverlay=mcp2515-can0,oscillator=16000000,interrupt=25
++dtoverlay=spi-bcm2835-overlay
++
++# GPIO config for evotrainer platform
++dtoverlay=gpio-shutdown,gpio_pin=17,active_low=1,gpio_pull=up
++gpio=22=op,pl,dh
++
+ # Enable audio (loads snd_bcm2835)
+ dtparam=audio=on
+ 
