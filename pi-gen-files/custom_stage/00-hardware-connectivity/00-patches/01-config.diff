@@ -1,5 +1,5 @@
---- config.txt.orig	2020-10-20 15:31:28.000000000 +0200
-+++ config.txt	2020-10-20 17:09:10.607332391 +0200
+--- a/rootfs/boot/config.txt	2020-10-20 15:31:28.000000000 +0200
++++ b/rootfs/boot/config.txt	2020-10-20 17:09:10.607332391 +0200
 @@ -53,6 +53,17 @@
  
  # Additional overlays and parameters are documented /boot/overlays/README
