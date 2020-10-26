@@ -1,9 +1,9 @@
 #!/bin/bash -e
 
 rosdep init
-rosdep --as-root pip:false update 
 
 su - ${FIRST_USER_NAME} <<EOF
+rosdep update 
 mkdir -p ~/ros_catkin_ws
 cd ~/ros_catkin_ws
 rosinstall_generator ros_comm --rosdistro melodic --deps --wet-only --tar > melodic-ros_comm-wet.rosinstall
