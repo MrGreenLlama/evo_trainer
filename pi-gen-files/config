@@ -10,3 +10,4 @@ FIRST_USER_PASS=evocortex
 ENABLE_SSH=1
 STAGE_LIST="stage0 stage1 stage2 custom_stage"
 
+CLEAN=1
