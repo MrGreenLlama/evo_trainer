@@ -8,6 +8,6 @@ TARGET_HOSTNAME=EvoTrainerPi
 FIRST_USER_NAME=evocortex
 FIRST_USER_PASS=evocortex
 ENABLE_SSH=1
-STAGE_LIST="stage0 stage1 stage2 custom_stage"
+STAGE_LIST="stage0 stage1 stage2 trainer_base evocortex_ros"
 
 CLEAN=1

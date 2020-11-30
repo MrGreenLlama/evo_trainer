@@ -29,4 +29,7 @@ rosdep --as-root pip:false install -y \
 	--install-space /opt/ros/melodic \
 	-j
 
-echo "source /opt/ros/melodic/setup.bash" >> /home/${FIRST_USER_NAME}/.bashrc
+su - ${FIRST_USER_NAME} <<EOF
+rosdep update
+echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
+EOF
