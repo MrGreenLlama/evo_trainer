@@ -1,0 +1,69 @@
+name: 'Build Image'
+
+on:
+  push:
+    branches:
+    - 'master'
+    paths:
+    - '.github/workflows/build-image.yml'
+    - 'pi-gen-files/**'
+  pull_request:
+    branches:
+    - 'master'
+    paths:
+    - '.github/workflows/build-image.yml'
+    - 'pi-gen-files/**'
+
+jobs:
+  build_image:
+    name: 'Build Raspberry OS Image'
+    runs-on: 'ubuntu-latest'
+    
+    steps:
+    
+    - name: 'Checkout Repo'
+      uses: actions/checkout@v2
+    
+    - name: 'Checkout RPi-Gen'
+      uses: actions/checkout@v2
+      with:
+        repository: 'RPi-Distro/pi-gen'
+        path: 'pi-gen-files/pi-gen'
+  
+    - name: 'Setup QEMU Static'
+      uses: docker/setup-qemu-action@v1
+      id: qemu
+
+    - name: 'Prepare stages'
+      working-directory: 'pi-gen-files/pi-gen'
+      run: |
+        touch ./stage2/SKIP_IMAGES
+        cp -r ../{config,trainer_base,evocortex_ros} ./
+
+    - name: 'Do Build'
+      working-directory: 'pi-gen-files/pi-gen'
+      run: |
+        sudo ./build-docker.sh -c config
+        rm deploy/*.img
+
+    - name: 'Store resulting Image'
+      uses: actions/upload-artifact@v2
+      with:
+        name: 'Images'
+        path: |
+          pi-gen-files/pi-gen/deploy/*.zip
+
+    - name: 'Upload to FTP'
+      uses: actions/sftp-uploader@1.1
+      with:
+        host: fixme.example.net
+        port: 22
+        username: ${USERNAME}
+        password: ${PASSWORD}
+        localdir: 'pi-gen-files/pi-gen/deploy'
+        remotedir: '/tbd/'
+        dryRun: true
+      env:
+        USERNAME: ${{ secrets.FTP_USER }}
+        PASSWORD: ${{ secrets.FTP_PASS }}
+

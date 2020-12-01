@@ -1,0 +1,6 @@
+build-essential
+cmake
+python-rosdep
+python-rosinstall
+python-rosinstall-generator
+python-wstool
