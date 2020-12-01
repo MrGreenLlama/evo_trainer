@@ -7,18 +7,18 @@ on:
         description: 'Skip the publish steps at the end'
         required: false
         default: 'false'
-  push:
-    branches:
-    - 'master'
-    paths:
-    - '.github/workflows/build-image-action.yml'
-    - 'pi-gen-files/**'
-  pull_request:
-    branches:
-    - 'master'
-    paths:
-    - '.github/workflows/build-image-action.yml'
-    - 'pi-gen-files/**'
+#  push:
+#    branches:
+#    - 'master'
+#    paths:
+#    - '.github/workflows/build-image-action.yml'
+#    - 'pi-gen-files/**'
+#  pull_request:
+#    branches:
+#    - 'master'
+#    paths:
+#    - '.github/workflows/build-image-action.yml'
+#    - 'pi-gen-files/**'
 
 jobs:
   build_image:
@@ -58,7 +58,6 @@ jobs:
         name: 'Images'
         path: |
           pi-gen-files/pi-gen/deploy/*.zip
-      if: ${{ github.event_name != 'workflow_dispatch' || github.event.inputs.skip_publish != 'true' }}
 
     - name: 'Upload to FTP'
       uses: wangyucode/sftp-upload-action@v1.1
