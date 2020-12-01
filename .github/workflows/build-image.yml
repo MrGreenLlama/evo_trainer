@@ -1,6 +1,12 @@
 name: 'Build Image'
 
 on:
+  workflow_dispatch:
+    inputs:
+      skip_publish:
+        description: 'Skip the publish steps at the end'
+        required: false
+        default: false
   push:
     branches:
     - 'master'
@@ -52,6 +58,7 @@ jobs:
         name: 'Images'
         path: |
           pi-gen-files/pi-gen/deploy/*.zip
+      if: ${{ github.event_name != 'workflow_dispatch' || !github.event.inputs.skip_publish }}
 
     - name: 'Upload to FTP'
       uses: actions/sftp-uploader@1.1
@@ -66,4 +73,5 @@ jobs:
       env:
         USERNAME: ${{ secrets.FTP_USER }}
         PASSWORD: ${{ secrets.FTP_PASS }}
+      if: ${{ github.event_name != 'workflow_dispatch' || !github.event.inputs.skip_publish }}
 
