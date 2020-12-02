@@ -41,7 +41,7 @@ jobs:
       working-directory: 'pi-gen-files/pi-gen'
       run: |
         sudo ./build-docker.sh -c config
-        rm deploy/*.img
+        rm deploy/*.img || true
 
     - name: 'Store resulting Image'
       uses: actions/upload-artifact@v2
