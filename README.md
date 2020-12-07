@@ -15,7 +15,7 @@ After download, these images can be flashed to any sufficiently large SD-card
 following the standard SD-card image flashing procedures (e.g. using `dd` or
 [Etcher](https://www.balena.io/etcher/) ).
 Please note, since this is not an image provided by the Raspberry Pi organization,
-the official Imager tool will not easyly work.
+the official Imager tool will not easily work.
 
 ### Building the Image
 
