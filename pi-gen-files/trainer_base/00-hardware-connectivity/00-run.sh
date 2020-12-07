@@ -21,4 +21,4 @@ ln -sf "/lib/systemd/system/dnsmasq.service" \
 	"${ROOTFS_DIR}/etc/systemd/system/multi-user.target.wants/dnsmasq.service"
 
 # disable dhcpcd
-rm "${ROOTFS_DIR}/etc/systemd/system/mulit-user.target.wants/dhcpcd.service"
+rm "${ROOTFS_DIR}/etc/systemd/system/mulit-user.target.wants/dhcpcd.service" || true
