@@ -53,15 +53,12 @@ jobs:
     - name: 'Upload to FTP'
       uses: wangyucode/sftp-upload-action@v1.1
       with:
-        host: fixme.example.net
+        host: ${{ secrets.FTP_SERVER }}
         port: 22
-        username: ${USERNAME}
-        password: ${PASSWORD}
+        username: ${{ secrets.FTP_USER }}
+        password: ${{ secrets.FTP_PASS }}
         localdir: 'pi-gen-files/pi-gen/deploy'
-        remotedir: '/tbd/'
+        remotedir: '/evo_trainer_images/'
         dryRun: true
-      env:
-        USERNAME: ${{ secrets.FTP_USER }}
-        PASSWORD: ${{ secrets.FTP_PASS }}
       if: ${{ github.event_name != 'workflow_dispatch' || github.event.inputs.skip_publish != 'true' }}
 
