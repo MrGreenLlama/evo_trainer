@@ -6,8 +6,8 @@ auto wlan0
 iface wlan0 inet static
 	address 192.168.10.1/24
 
-hotplug eth0
-iface eth0 inet static
+auto usb0
+iface usb0 inet static
 	address 192.168.100.2/24
 	gateway 192.168.100.1
 	dns-nameserver 192.168.100.1
