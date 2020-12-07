@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 # enable usb-network module
-echo -n " modules-load=dwc2,g_ether" >>"${ROOTFS_DIR}/boot/cmdline.txt"
+sed -i -e '0a modules-load=dwc2,g_ether' "${ROOTFS_DIR}/boot/cmdline.txt"
 
 # configure services
 install -Dm 644 "./files/01-update-ssid.conf" \
@@ -15,7 +15,7 @@ cat "./files/interfaces" >>"${ROOTFS_DIR}/etc/network/interfaces"
 # enable services
 ln -sf "/etc/systemd/system/alive-pin.service" \
 	"${ROOTFS_DIR}/etc/systemd/system/multi-user.target.wants/alive-pin.service"
-ln -sf "/usr/lib/systemd/system/hostapd.service" \
+ln -sf "/lib/systemd/system/hostapd.service" \
 	"${ROOTFS_DIR}/etc/systemd/system/multi-user.target.wants/hostapd.service"
-ln -sf "/usr/lib/systemd/system/dnsmasq.service" \
+ln -sf "/lib/systemd/system/dnsmasq.service" \
 	"${ROOTFS_DIR}/etc/systemd/system/multi-user.target.wants/dnsmasq.service"
