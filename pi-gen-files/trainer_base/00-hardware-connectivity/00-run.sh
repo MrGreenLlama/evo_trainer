@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 # enable usb-network module
-sed -i -e '1a modules-load=dwc2,g_ether' "${ROOTFS_DIR}/boot/cmdline.txt"
+sed -i -e '1s/$/ modules-load=dwc2,g_ether/' "${ROOTFS_DIR}/boot/cmdline.txt"
 
 # configure services
 install -Dm 644 "./files/01-update-ssid.conf" \
