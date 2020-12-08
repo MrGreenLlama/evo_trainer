@@ -36,6 +36,10 @@ jobs:
       run: |
         touch ./stage2/SKIP_IMAGES
         cp -r ../{config,trainer_base,evocortex_ros} ./
+        if [[ "${GITHUB_EVENT_NAME}" = "push" ]]; then
+          echo "IMG_FILENAME=\${IMG_NAME}-$(basename ${GITHUB_REF})" >>config
+          echo "ZIP_FILENAME=\${IMG_FILENAME}" >>config
+        fi
 
     - name: 'Do Build'
       working-directory: 'pi-gen-files/pi-gen'
