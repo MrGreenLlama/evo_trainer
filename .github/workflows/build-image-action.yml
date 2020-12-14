@@ -63,6 +63,5 @@ jobs:
         password: ${{ secrets.FTP_PASS }}
         localdir: 'pi-gen-files/pi-gen/deploy'
         remotedir: '/evo_trainer_images/'
-        dryRun: true
       if: ${{ github.event_name != 'workflow_dispatch' || github.event.inputs.skip_publish != 'true' }}
 
